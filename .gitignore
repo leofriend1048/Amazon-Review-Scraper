@@ -1,0 +1,24 @@
+# Data & generated files
+data/
+*.csv
+*_dossier*.html
+*_dossier*.pdf
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code
+.claude/
