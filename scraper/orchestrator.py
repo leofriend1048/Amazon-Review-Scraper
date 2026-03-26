@@ -132,7 +132,8 @@ class Orchestrator:
     def _get_shared_browser(self):
         if self._pw is None:
             self._pw = sync_playwright().start()
-            self._browser_instance = self._pw.chromium.launch(
+            import os
+            launch_kwargs = dict(
                 headless=self.headless,
                 args=[
                     "--disable-blink-features=AutomationControlled",
@@ -141,6 +142,10 @@ class Orchestrator:
                     "--no-default-browser-check",
                 ],
             )
+            exe = os.environ.get("PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH")
+            if exe:
+                launch_kwargs["executable_path"] = exe
+            self._browser_instance = self._pw.chromium.launch(**launch_kwargs)
         return self._pw, self._browser_instance
 
     def _make_browser(self) -> StealthBrowser:

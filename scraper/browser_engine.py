@@ -108,6 +108,11 @@ class StealthBrowser:
             if self.proxy:
                 launch_args["proxy"] = {"server": self.proxy}
 
+            import os
+            exe = os.environ.get("PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH")
+            if exe:
+                launch_args["executable_path"] = exe
+
             self._browser = self._playwright.chromium.launch(**launch_args)
             self._owns_browser = True
 
